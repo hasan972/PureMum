@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PureMum - Premium Mineral Water</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e0f7ff 0%, #f0f9ff 100%);
+      color: #1a1a1a;
+      overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: linear-gradient(135deg, #0066cc 0%, #00a8e8 100%);
+      box-shadow: 0 8px 32px rgba(0, 102, 204, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    header h1 {
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    nav {
+      display: flex;
+      gap: 35px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #00ffd5;
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+      color: white;
+      transition: transform 0.3s ease;
+    }
+
+    .cart-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      background: #ff6b6b;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .lang-btn {
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+    }
+
+    .lang-btn:hover {
+      background: white;
+      color: #0066cc;
+      transform: scale(1.05);
+    }
+
+    #home {
+      background:
+       /* linear-gradient(135deg, rgba(0, 102, 204, 0.85) 0%, rgba(0, 168, 232, 0.85) 50%, rgba(0, 212, 255, 0.85) 100%),  */
+                  url('https://images.unsplash.com/photo-1578895101408-1a36b834405b?q=80&w=1095&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover;
+      color: white;
+      padding: 200px 50px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #home::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    #home::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(30px); }
+    }
+
+    #home h2 {
+      font-size: 56px;
+      margin-bottom: 25px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+      animation: slideInDown 0.8s ease;
+      text-shadow: 2px 2px 8px rgb(0, 0, 0);
+    }
+
+    #home p {
+      font-size: 20px;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+      animation: slideInUp 0.8s ease;
+      opacity: 0.95;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 15px 40px;
+      background: linear-gradient(135deg, #00ffd5 0%, #00d4ff 100%);
+      color: #0066cc;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.4s ease;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(0, 212, 255, 0.6);
+    }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes slideInUp {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    section {
+      padding: 100px 50px;
+      text-align: center;
+    }
+
+    section h2 {
+      font-size: 42px;
+      color: #0066cc;
+      margin-bottom: 15px;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+
+    section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #0066cc, #00a8e8, #00d4ff);
+      border-radius: 2px;
+    }
+
+    #about {
+      background: linear-gradient(to right, #f0f9ff 0%, #cbe5fa 100%);
+      margin-top: 40px;
+    }
+
+    #about p {
+      max-width: 750px;
+      margin: 40px auto;
+      font-size: 18px;
+      color: #333;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    #products {
+      background: linear-gradient(135deg, #e8f6ff 0%, #f0f9ff 100%);
+      margin-top: 40px;
+    }
+    .about-section {
+  background: linear-gradient(to bottom right, #f4f9ff, #e8f3ff);
+  padding: 80px 20px;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.about-text h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #004a80;
+}
+
+.about-text p {
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.about-list li {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #004a80;
+  font-weight: 600;
+}
+
+.about-image img {
+  width: 380px;
+  max-width: 100%;
+  filter: drop-shadow(0px 10px 30px rgba(0,0,0,0.15));
+}
+
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background: linear-gradient(135deg, rgba(0, 168, 232, 0.1), rgba(0, 212, 255, 0.1));
+      border: 2px solid rgba(0, 168, 232, 0.3);
+      padding: 25px;
+      border-radius: 25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 15px 40px rgba(0, 102, 204, 0.15);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .product-card:hover::before {
+      left: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-15px);
+      border-color: rgba(0, 212, 255, 0.6);
+      box-shadow: 0 25px 50px rgba(0, 102, 204, 0.25);
+      background: linear-gradient(135deg, rgba(0, 168, 232, 0.2), rgba(0, 212, 255, 0.2));
+    }
+
+    .product-img-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      margin-bottom: 15px;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      z-index: 10;
+    }
+
+    .discount-badge {
+      background: linear-gradient(135deg, #ff6b6b, #ff4757);
+      color: white;
+    }
+
+    .offer-badge {
+      background: linear-gradient(135deg, #ffa502, #ff6b35);
+      color: white;
+    }
+
+    .product-info {
+      margin-top: 15px;
+    }
+
+    .product-card h3 {
+      color: #0066cc;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price-section {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+      margin: 12px 0;
+    }
+
+    .price-current {
+      font-size: 24px;
+      color: #0066cc;
+      font-weight: 700;
+    }
+
+    .price-original {
+      font-size: 16px;
+      color: #999;
+      text-decoration: line-through;
+    }
+
+    .discount-percent {
+      background: #ff6b6b;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .product-desc {
+      font-size: 14px;
+      color: #666;
+      margin: 10px 0 15px;
+      line-height: 1.5;
+    }
+
+    .add-to-cart-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #0066cc, #00a8e8);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .add-to-cart-btn:hover {
+      background: linear-gradient(135deg, #0052a3, #0086b3);
+      transform: scale(1.02);
+    }
+
+    #contact {
+      background: linear-gradient(135deg, #00a8e8 0%, #0066cc 100%);
+      padding: 100px 50px;
+      margin-top: 40px;
+    }
+
+    #contact h2 {
+      color: white;
+    }
+
+    #contact h2::after {
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    }
+
+    .contact-box {
+      max-width: 600px;
+      margin: 50px auto;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 45px;
+      border-radius: 25px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .contact-box p {
+      margin: 20px 0;
+      font-size: 16px;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    .contact-box strong {
+      color: #0066cc;
+      font-weight: 700;
+    }
+
+    footer {
+      background: linear-gradient(135deg, #004080 0%, #0066cc 100%);
+      color: white;
+      padding: 60px 50px 40px;
+      text-align: center;
+      margin-top: 0;
+    }
+
+    footer h3 {
+      font-size: 24px;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    footer iframe {
+      border-radius: 18px;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.4s ease;
+    }
+
+    footer iframe:hover {
+      transform: scale(1.02);
+    }
+
+    footer p {
+      margin-top: 30px;
+      font-size: 14px;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-modal.active {
+      display: flex;
+    }
+
+    .cart-content {
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #e0f7ff;
+      padding-bottom: 15px;
+    }
+
+    .cart-header h2 {
+      color: #0066cc;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      color: #0066cc;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid #e0f7ff;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 700;
+      color: #0066cc;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-price {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .cart-item-remove {
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .cart-total {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #0066cc;
+      text-align: right;
+    }
+
+    .cart-total-label {
+      font-size: 18px;
+      color: #0066cc;
+      font-weight: 700;
+    }
+
+    .cart-total-amount {
+      font-size: 28px;
+      color: #0066cc;
+      font-weight: 800;
+      margin-top: 10px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #0066cc, #00a8e8);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      background: linear-gradient(135deg, #0052a3, #0086b3);
+    }
+
+    .empty-cart {
+      text-align: center;
+      color: #666;
+      padding: 30px 0;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px 30px;
+      }
+
+      .header-right {
+        flex-direction: column;
+        width: 100%;
+        gap: 15px;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+      }
+
+      #home {
+        padding: 120px 30px;
+        min-height: auto;
+      }
+
+      #home h2 {
+        font-size: 36px;
+      }
+
+      section {
+        padding: 60px 30px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+    }
+    .qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #ddd;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.qty-number {
+  margin: 0 8px;
+  font-size: 18px;
+}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  #contact {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #0052a3, #0086b3);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-container {
+    max-width: 1100px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .contact-info h2 {
+    font-size: 2.8rem;
+    color: #222;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 15px;
+  }
+
+  .contact-info-subtitle {
+    font-size: 1rem;
+    color: #eae1e1;
+    margin-bottom: 20px;
+  }
+
+  .info-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+  }
+
+  .info-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  .info-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    flex-shrink: 0;
+  }
+
+  .info-icon.email {
+    background: #ffe5e5;
+  }
+
+  .info-icon.phone {
+    background: #e5f3ff;
+  }
+
+  .info-icon.location {
+    background: #e5ffe5;
+  }
+
+  .info-content h3 {
+    font-size: 1.1rem;
+    color: #222;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .info-content p {
+    font-size: 0.95rem;
+    color: #666;
+  }
+
+  .contact-form-wrapper {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .contact-form-wrapper h3 {
+    font-size: 1.8rem;
+    color: #222;
+    margin-bottom: 25px;
+    font-weight: 600;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #25d366;
+    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+  }
+
+  .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #0066cc, #00a8e8);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+  }
+
+  .whatsapp-chat {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: all 0.3s ease;
+    z-index: 999;
+    animation: pulse 2s infinite;
+  }
+
+  .whatsapp-chat:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+  }
+
+  .whatsapp-chat svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+    50% {
+      box-shadow: 0 4px 25px rgba(37, 211, 102, 0.6);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .contact-container {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+
+    .contact-info h2 {
+      font-size: 2rem;
+    }
+
+    .contact-form-wrapper {
+      padding: 25px;
+    }
+
+    .whatsapp-chat {
+      width: 60px;
+      height: 60px;
+    }
+
+    .whatsapp-chat svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1 id="title">PureMum</h1>
+  <div class="header-right">
+    <nav>
+      <a href="#home" data-en="Home" data-ar="الرئيسية">Home</a>
+      <a href="#about" data-en="About Us" data-ar="من نحن">About Us</a>
+      <a href="#products" data-en="Products" data-ar="المنتجات">Products</a>
+      <a href="#contact" data-en="Contact" data-ar="اتصل بنا">Contact</a>
+    </nav>
+    <div class="cart-icon" onclick="toggleCart()">
+      🛒
+      <span class="cart-count" id="cartCount">0</span>
+    </div>
+    <button class="lang-btn" onclick="toggleLanguage()">العربية</button>
+  </div>
+</header>
+
+<section id="home">
+  <h2 id="home_title" data-en="Pure, Fresh, Premium Mineral Water" data-ar="مياه معدنية نقية وطازجة وعالية الجودة">Pure, Fresh, Premium Mineral Water</h2>
+  <p id="home_desc" data-en="Stay healthy and hydrated with PureMum." data-ar="ابقَ بصحة ورطوبة مع بيور مام.">Stay healthy and hydrated with PureMum.</p>
+  <a href="#products" class="cta-button" data-en="Shop Now" data-ar="تسوق الآن">Shop Now</a>
+</section>
+
+<!-- <section id="about">
+  <h2 data-en="About Us" data-ar="من نحن">About Us</h2>
+  <p id="about_text" data-en="PureMum is a premium mineral water brand in Saudi Arabia, delivering clean, refreshing water sourced and filtered to perfection." data-ar="بيور مام هي علامة تجارية سعودية للمياه المعدنية عالية الجودة، تقدم مياهاً نقية ومنعشة يتم تنقيتها بعناية.">PureMum is a premium mineral water brand in Saudi Arabia, delivering clean, refreshing water sourced and filtered to perfection.</p>
+</section> -->
+<section id="about" class="about-section">
+  <div class="about-container">
+    
+    <div class="about-text">
+      <h2 data-en="About Us" data-ar="من نحن">About Us</h2>
+
+      <p data-en="PureMum is a premium Saudi mineral water brand committed to delivering clean, refreshing, and perfectly balanced hydration. Every drop goes through advanced purification to ensure exceptional quality that meets global standards."
+         data-ar="بيور مام هي علامة تجارية سعودية للمياه المعدنية الممتازة، ملتزمة بتقديم مياه نقية ومنعشة ومتوازنة تمامًا. يمر كل قطرة بعمليات تنقية متقدمة لضمان جودة استثنائية بمعايير عالمية.">
+        PureMum is a premium Saudi mineral water brand committed to delivering clean, refreshing, and perfectly balanced hydration. Every drop goes through advanced purification to ensure exceptional quality that meets global standards.
+      </p>
+
+      <p data-en="With a mission to promote healthier lifestyles, PureMum offers water that is not only pure but also enriched with essential minerals for your daily well-being."
+         data-ar="برسالة تهدف إلى تعزيز أسلوب حياة صحي، تقدم بيور مام مياهًا نقية وغنية بالمعادن الأساسية لرفاهيتك اليومية.">
+        With a mission to promote healthier lifestyles, PureMum offers water that is not only pure but also enriched with essential minerals for your daily well-being.
+      </p>
+
+      <ul class="about-list">
+        <li data-en="• Ultra-purified & balanced mineral composition"
+            data-ar="• تنقية فائقة وتركيبة معدنية متوازنة">
+          • Ultra-purified & balanced mineral composition
+        </li>
+        <li data-en="• Bottled following strict international standards"
+            data-ar="• تعبئة وفق أعلى المعايير الدولية">
+          • Bottled following strict international standards
+        </li>
+        <li data-en="• Fresh, smooth taste trusted across Saudi Arabia"
+            data-ar="• طعم ناعم ومنعش يحظى بثقة المستهلكين في جميع أنحاء السعودية">
+          • Fresh, smooth taste trusted across Saudi Arabia
+        </li>
+      </ul>
+    </div>
+
+    <div class="about-image">
+      <img src="https://h2oglobalnews.com/wp-content/uploads/2023/08/water-types-1024x731.webp" alt="PureMum Bottle" />
+    </div>
+
+  </div>
+</section>
+
+
+<section id="products">
+  <h2 data-en="Our Products" data-ar="منتجاتنا">Our Products</h2>
+  <div class="products">
+    <div class="product-card">
+      <div class="product-img-wrapper">
+        <img src="https://bf1af2.akinoncloudcdn.com/products/2024/09/23/134773/233124c0-1b59-4cf9-b20f-ac865accf5fc_size1920_cropCenter.jpg" alt="Water Bottle" />
+        <!-- <span class="badge discount-badge">-15%</span> -->
+      </div>
+      <div class="product-info">
+        <h3 data-en="Aquafina Still Drinking Water Bottle 500 ml" data-ar="زجاجة مياه أكوافينا للشرب سعة 500 مل">Aquafina Still Drinking Water Bottle 500 ml</h3>
+        <p class="product-desc" data-en="Pure mineral water" data-ar="مياه معدنية نقية">Pure mineral water</p>
+        <div class="price-section">
+          <span class="price-current">1.10 SR</span>
+          <!-- <span class="price-original">1.10 SR</span> -->
+          <!-- <span class="discount-percent">-0%</span> -->
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart('Aquafina Still Drinking Water Bottle 500 ml', 1.10)" data-en="Add to Cart" data-ar="أضف إلى السلة">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrapper">
+        <img src="https://bf1af2.akinoncloudcdn.com/products/2024/09/23/134773/fe07102f-e43e-4efe-934b-631d832d347d_size1920_cropCenter.jpg" alt="Water Bottle" />
+        <span class="badge offer-badge" data-en="Special Offer" data-ar="عرض خاص">Special Offer</span>
+      </div>
+      <div class="product-info">
+        <h3 data-en="Aquafina Still Drinking Water Bottle 12 x 500 ml" data-ar="زجاجة مياه أكوافينا للشرب 12 × 500 مل">Aquafina Still Drinking Water Bottle 12 x 500 ml</h3>
+        <p class="product-desc" data-en="For families" data-ar="للعائلات">For families</p>
+        <div class="price-section">
+          <span class="price-current">8.31 SR</span>
+          <span class="price-original">8.75 SR</span>
+          <span class="discount-percent">-5%</span>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart('1.5L Family Size', 8.75)" data-en="Add to Cart" data-ar="أضف إلى السلة">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrapper">
+        <img src="https://bf1af2.akinoncloudcdn.com/products/2024/09/23/134773/ee5fc40d-b15f-4b92-b13a-af251dacf0ac_size1920_cropCenter.jpg" alt="Water Bottle" />
+        <span class="badge discount-badge">-10%</span>
+      </div>
+      <div class="product-info">
+        <h3 data-en="Travel Pack" data-ar="حزمة السفر">Aquafina Still Drinking Water Bottle 24 x 500 ml</h3>
+        <p class="product-desc" data-en="On-the-go hydration" data-ar="زجاجة مياه أكوافينا للشرب ٢٤ × ​​٥٠٠ مل">Aquafina Still Drinking Water Bottle 24 x 500 ml</p>
+        <div class="price-section">
+          <span class="price-current">14.85 SR</span>
+          <span class="price-original">16.50 SR</span>
+          <span class="discount-percent">-10%</span>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart('Travel Pack', 14.85)" data-en="Add to Cart" data-ar="أضف إلى السلة">Add to Cart</button>
+      </div>
+    </div>
+    <!--Duplicate-->
+     <div class="product-card">
+      <div class="product-img-wrapper">
+        <img src="https://bf1af2.akinoncloudcdn.com/products/2025/01/21/325011/1af0bb58-3b1c-4267-94fd-0c401215ccdd_size1920_cropCenter.jpg" alt="Water Bottle" />
+        <!-- <span class="badge discount-badge">-15%</span> -->
+      </div>
+      <div class="product-info">
+        <h3 data-en="Holy Zamzam Water 5 Liter" data-ar="ماء زمزم الشريف ٥ لتر">Holy Zamzam Water 5 Liter</h3>
+        <p class="product-desc" data-en="Pure mineral water" data-ar="مياه معدنية نقية">Pure mineral water</p>
+        <div class="price-section">
+          <span class="price-current">9.75 SR</span>
+          <!-- <span class="price-original">1.10 SR</span> -->
+          <!-- <span class="discount-percent">-0%</span> -->
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart('Holy Zamzam Water 5 Liter', 9.75)" data-en="Add to Cart" data-ar="أضف إلى السلة">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrapper">
+        <img src="https://bf1af2.akinoncloudcdn.com/products/2024/12/20/92350/9407ceff-f3b2-4ed2-9e0b-d72ddba5a83c_size1920_cropCenter.jpg" alt="Water Bottle" />
+        <!-- <span class="badge offer-badge" data-en="Special Offer" data-ar="عرض خاص">Special Offer</span> -->
+      </div>
+      <div class="product-info">
+        <h3 data-en="Arwa Drinking Water 12 x 500 ml" data-ar="مياه شرب أروى 12 × 500 مل">Arwa Drinking Water 12 x 500 ml</h3>
+        <p class="product-desc" data-en="For families" data-ar="للعائلات">For families</p>
+        <div class="price-section">
+          <span class="price-current">9.25 SR</span>
+          <!-- <span class="price-original">9.25 SR</span> -->
+          <!-- <span class="discount-percent">-5%</span> -->
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart('1.5L Family Size', 9.25)" data-en="Add to Cart" data-ar="أضف إلى السلة">Add to Cart</button>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img-wrapper">
+        <img src="https://bf1af2.akinoncloudcdn.com/products/2024/09/23/134773/ee5fc40d-b15f-4b92-b13a-af251dacf0ac_size1920_cropCenter.jpg" alt="Water Bottle" />
+        <span class="badge discount-badge">-10%</span>
+      </div>
+      <div class="product-info">
+        <h3 data-en="Travel Pack" data-ar="حزمة السفر">Aquafina Still Drinking Water Bottle 24 x 500 ml</h3>
+        <p class="product-desc" data-en="On-the-go hydration" data-ar="زجاجة مياه أكوافينا للشرب ٢٤ × ​​٥٠٠ مل">Aquafina Still Drinking Water Bottle 24 x 500 ml</p>
+        <div class="price-section">
+          <span class="price-current">14.85 SR</span>
+          <span class="price-original">16.50 SR</span>
+          <span class="discount-percent">-10%</span>
+        </div>
+        <button class="add-to-cart-btn" onclick="addToCart('Travel Pack', 14.85)" data-en="Add to Cart" data-ar="أضف إلى السلة">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section id="contact">
+  <h2 data-en="Contact Us" data-ar="اتصل بنا">Contact Us</h2>
+  <div class="contact-box">
+    <p data-en="Reach us anytime:" data-ar="تواصل معنا في أي وقت:">Reach us anytime:</p>
+    <p><strong>Email:</strong> info@puremum.com</p>
+    <p><strong>Phone:</strong> +966 58 044 8732</p>
+    <p><strong>Address:</strong> Dammam, Saudi Arabia</p>
+  </div>
+</section> -->
+<section id="contact">
+  <div class="contact-container">
+    <!-- Contact Info Section -->
+    <div class="contact-info">
+      <div>
+        <h2 data-en="Get in Touch" data-ar="تواصل معنا">Get in Touch</h2>
+        <p class="contact-info-subtitle" data-en="We'd love to hear from you. Reach us through any channel." data-ar="نود أن نسمع منك. تواصل معنا عبر أي قناة.">We'd love to hear from you. Reach us through any channel.</p>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon email">✉️</div>
+        <div class="info-content">
+          <h3 data-en="Email" data-ar="البريد الإلكتروني">Email</h3>
+          <p>info@puremum.com</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon phone">📱</div>
+        <div class="info-content">
+          <h3 data-en="Phone" data-ar="الهاتف">Phone</h3>
+          <p>+966 58 044 8732</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon location">📍</div>
+        <div class="info-content">
+          <h3 data-en="Address" data-ar="العنوان">Address</h3>
+          <p>Dammam, Saudi Arabia</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="contact-form-wrapper">
+      <h3 data-en="Send us a Message" data-ar="أرسل لنا رسالة">Send us a Message</h3>
+      <form id="contactForm">
+        <div class="form-group">
+          <label for="name" data-en="Your Name" data-ar="اسمك">Your Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email" data-en="Email Address" data-ar="عنوان بريدك الإلكتروني">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone" data-en="Phone Number" data-ar="رقم الهاتف">Phone Number</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+
+        <div class="form-group">
+          <label for="message" data-en="Message" data-ar="الرسالة">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" data-en="Send Message" data-ar="إرسال الرسالة">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- WhatsApp Chat Button -->
+  <a href="https://wa.me/966580448732" target="_blank" class="whatsapp-chat" title="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a6.963 6.963 0 00-6.952 6.952c0 1.528.38 3.022 1.108 4.353L3.638 20.362l4.604-1.208a6.952 6.952 0 004.223 1.35h.004c3.831 0 6.956-3.125 6.956-6.956 0-1.858-.72-3.603-2.028-4.911-1.308-1.308-3.053-2.028-4.911-2.028" />
+    </svg>
+  </a>
+</section>
+
+<footer>
+  <h3 data-en="Find Us" data-ar="موقعنا">Find Us</h3>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d233278.57840200342!2d49.534166!3d26.448832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2afe25e2b4d8df%3A0x63b0b3a23a1fb08d!2sDammam%2C%20Saudi%20Arabia!5e0!3m2!1sen!2ssa!4v1700000000000"
+    width="100%" height="250" style="border:0;" allowfullscreen loading="lazy"></iframe>
+  <p data-en="© 2025 PureMum. All Rights Reserved." data-ar="© 2025 بيورمام. تم تطويره بواسطة دكتوراه في الطب. راكبول حسن ">© 2025 PureMum. Developed By MD. RAKIBUL HASAN</p>
+</footer>
+
+<!-- Cart Modal -->
+<div class="cart-modal" id="cartModal">
+  <div class="cart-content">
+    <div class="cart-header">
+      <h2 data-en="Your Cart" data-ar="سلتك">Your Cart</h2>
+      <button class="close-btn" onclick="toggleCart()">&times;</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="cart-total">
+      <div class="cart-total-label" data-en="Total:" data-ar="المجموع:">Total:</div>
+      <div class="cart-total-amount" id="cartTotal">0.00 SR</div>
+    </div>
+    <button class="checkout-btn" data-en="Proceed to Checkout" data-ar="متابعة الدفع">Proceed to Checkout</button>
+  </div>
+</div>
+
+<!-- <script>
+  let isArabic = false;
+  let cart = [];
+
+  function toggleLanguage() {
+    console.log("asdsadsa");
+    
+    isArabic = !isArabic;
+    const elements = document.querySelectorAll('[data-en]');
+
+    document.body.style.opacity = 0;
+    setTimeout(() => {
+      elements.forEach(el => {
+        el.textContent = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+      });
+      document.body.style.direction = isArabic ? "rtl" : "ltr";
+      document.querySelector('.lang-btn').textContent = isArabic ? "English" : "العربية";
+      document.body.style.opacity = 1;
+    }, 300);
+  }
+
+  function addToCart(productName, price) {
+    cart.push({ name: productName, price: price });
+    updateCart();
+    alert(isArabic ? 'تمت إضافة المنتج إلى السلة!' : 'Product added to cart!');
+  }
+
+  function updateCart() {
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+
+    cartCount.textContent = cart.length;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<div class="empty-cart" data-en="Your cart is empty" data-ar="سلتك فارغة">Your cart is empty</div>';
+      cartTotal.textContent = '0.00 SR';
+      return;
+    }
+
+    let html = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      total += item.price;
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${item.price.toFixed(2)} SR</div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart(${index})">Remove</button>
+        </div>
+      `;
+    });
+
+    cartItems.innerHTML = html;
+    cartTotal.textContent = total.toFixed(2) + ' SR';
+  }
+
+  function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+  }
+
+  function toggleCart() {
+    const cartModal = document.getElementById('cartModal');
+    cartModal.classList.toggle('active');
+  }
+
+  // Update cart display on page load
+  updateCart();
+</script> -->
+<script>
+  let isArabic = false;
+  let cart = [];
+
+  function toggleLanguage() {
+    isArabic = !isArabic;
+    const elements = document.querySelectorAll('[data-en]');
+
+    document.body.style.opacity = 0;
+    setTimeout(() => {
+      elements.forEach(el => {
+        el.textContent = isArabic ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+      });
+      document.body.style.direction = isArabic ? "rtl" : "ltr";
+      document.querySelector('.lang-btn').textContent = isArabic ? "English" : "العربية";
+      document.body.style.opacity = 1;
+    }, 300);
+  }
+
+  // ================================
+  // ADD TO CART WITH QUANTITY
+  // ================================
+  function addToCart(productName, price) {
+    const existing = cart.find(item => item.name === productName);
+
+    if (existing) {
+      existing.quantity++;
+    } else {
+      cart.push({ name: productName, price: price, quantity: 1 });
+    }
+
+    updateCart();
+    alert(isArabic ? 'تمت إضافة المنتج إلى السلة!' : 'Product added to cart!');
+  }
+
+  // ================================
+  // UPDATE CART WITH + / - BUTTONS
+  // ================================
+  function updateCart() {
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    cart.forEach(item => totalItems += item.quantity);
+    cartCount.textContent = totalItems;
+
+    if (cart.length === 0) {
+      cartItems.innerHTML = '<div class="empty-cart" data-en="Your cart is empty" data-ar="سلتك فارغة">Your cart is empty</div>';
+      cartTotal.textContent = '0.00 SR';
+      return;
+    }
+
+    let html = "";
+
+    cart.forEach((item, index) => {
+      const itemTotal = item.price * item.quantity;
+      totalPrice += itemTotal;
+
+      html += `
+        <div class="cart-item">
+          <div class="cart-item-info">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-price">${item.price.toFixed(2)} SR</div>
+          </div>
+
+          <div class="cart-item-qty">
+            <button class="qty-btn" onclick="decreaseQty(${index})">−</button>
+            <span class="qty-number">${item.quantity}</span>
+            <button class="qty-btn" onclick="increaseQty(${index})">+</button>
+          </div>
+        </div>
+      `;
+    });
+
+    cartItems.innerHTML = html;
+    cartTotal.textContent = totalPrice.toFixed(2) + " SR";
+  }
+
+  // ================================
+  // QUANTITY BUTTON FUNCTIONS
+  // ================================
+  function increaseQty(index) {
+    cart[index].quantity++;
+    updateCart();
+  }
+
+  function decreaseQty(index) {
+    cart[index].quantity--;
+    if (cart[index].quantity <= 0) {
+      cart.splice(index, 1);
+    }
+    updateCart();
+  }
+
+  function toggleCart() {
+    const cartModal = document.getElementById('cartModal');
+    cartModal.classList.toggle('active');
+  }
+
+  // init
+  updateCart();
+   document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for your message! We will get back to you soon.');
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
+
